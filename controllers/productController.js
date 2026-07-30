@@ -55,6 +55,19 @@ exports.updateProduct = async (req, res, next) => {
   }
 };
 
+exports.bulkCreateProducts = async (req, res, next) => {
+  try {
+    const products = req.body.products;
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(400).json({ message: 'Products array required' });
+    }
+    const created = await Product.insertMany(products, { ordered: false });
+    res.status(201).json({ count: created.length, products: created });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.deleteProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
