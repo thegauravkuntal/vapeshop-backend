@@ -38,6 +38,7 @@ app.use('/api/categories', require('./routes/categories'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/leads', require('./routes/leads'));
 app.use('/api/uploads', require('./routes/uploads'));
+app.use('/api/images', require('./routes/images'));
 
 app.get('/', (req, res) => {
   res.json({ message: 'Vape Shop API is running' });

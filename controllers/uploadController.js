@@ -1,4 +1,5 @@
 const multer = require('multer');
+const Image = require('../models/Image');
 
 const ALLOWED_MIME = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
 const MAX_FILE_SIZE = 8 * 1024 * 1024;
@@ -20,16 +21,23 @@ const upload = multer({
 
 exports.imageUpload = [
   upload.single('image'),
-  (req, res, next) => {
+  async (req, res, next) => {
     try {
       if (!req.file) {
         return res.status(400).json({ message: 'No image file uploaded' });
       }
 
-      const dataUri = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+      const image = await Image.create({
+        data: req.file.buffer,
+        mime: req.file.mimetype,
+        size: req.file.buffer.length,
+      });
 
-      res.status(200).json({
-        url: dataUri,
+      const url = `${req.protocol}://${req.get('host')}/api/images/${image._id}`;
+
+      res.status(201).json({
+        id: image._id,
+        url,
         mime: req.file.mimetype,
         size: req.file.buffer.length,
       });
