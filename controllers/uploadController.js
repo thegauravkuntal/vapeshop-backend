@@ -33,7 +33,8 @@ exports.imageUpload = [
         size: req.file.buffer.length,
       });
 
-      const url = `${req.protocol}://${req.get('host')}/api/images/${image._id}`;
+      const proto = req.headers['x-forwarded-proto'] || req.protocol;
+      const url = `${proto}://${req.get('host')}/api/images/${image._id}`;
 
       res.status(201).json({
         id: image._id,
