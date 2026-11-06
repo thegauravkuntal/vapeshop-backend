@@ -41,6 +41,13 @@ router.get('/sitemap.xml', async (req, res) => {
 
     const staticPages = [
       { path: '/', changefreq: 'daily', priority: '1.0' },
+      { path: '/shop-all-vapes', changefreq: 'daily', priority: '0.9' },
+      { path: '/disposable-vapes-mumbai', changefreq: 'daily', priority: '0.9' },
+      { path: '/pod-systems-mumbai', changefreq: 'daily', priority: '0.9' },
+      { path: '/vape-accessories-mumbai', changefreq: 'daily', priority: '0.9' },
+      { path: '/buy-vape-online-mumbai', changefreq: 'daily', priority: '0.9' },
+      { path: '/contact-vape-shop-mumbai', changefreq: 'monthly', priority: '0.7' },
+      { path: '/blog', changefreq: 'weekly', priority: '0.7' },
       { path: '/store', changefreq: 'daily', priority: '0.9' },
       { path: '/about', changefreq: 'monthly', priority: '0.6' },
       { path: '/contact', changefreq: 'monthly', priority: '0.6' },
